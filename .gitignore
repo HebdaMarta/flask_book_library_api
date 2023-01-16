@@ -1,0 +1,6 @@
+.env
+flask_api_library.rar
+.idea/
+.pytest_cache/
+__pycache__/
+venv/

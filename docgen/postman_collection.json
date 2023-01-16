@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "a5fa4670-bab8-4675-a5c6-8aa09f739cd8",
+		"name": "Book Library API",
+		"description": "Backend API for managing authors, books, users and authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25231876"
+	},
+	"item": [
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Get All Authors",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fields",
+								"value": "id,first_name",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/authors?page=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,first_name",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-id",
+									"disabled": true
+								},
+								{
+									"key": "birth_date",
+									"value": "24-12-1798",
+									"disabled": true
+								},
+								{
+									"key": "birth_date[gte]",
+									"value": "24-12-1960",
+									"disabled": true
+								},
+								{
+									"key": "id[lt]",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Get all authors from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Adam\", \r\n    \"last_name\": \"Mickiewicz\", \r\n    \"birth_date\": \"24-12-1798\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/authors",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						},
+						"description": "Add new author to database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/authors/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1"
+							]
+						},
+						"description": "Get single author from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Update  Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Henryk\", \r\n    \"last_name\": \"Sienkiewicz\", \r\n    \"birth_date\": \"05-05-1846\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/authors/11",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"11"
+							]
+						},
+						"description": "Update author in the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete  Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/authors/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1"
+							]
+						},
+						"description": "Delete author from the database"
+					},
+					"response": []
+				}
+			],
+			"description": "Authors resource managment"
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/books?fields=id, title,number_of_pages&sort=number_of_page&number_of_page[gte]=400",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id, title,number_of_pages"
+								},
+								{
+									"key": "sort",
+									"value": "number_of_page"
+								},
+								{
+									"key": "number_of_page[gte]",
+									"value": "400"
+								}
+							]
+						},
+						"description": "Get all books from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/books/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"5"
+							]
+						},
+						"description": "Get single book from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"some book\",\r\n    \"isbn\": 1234567893156,\r\n    \"number_of_pages\": 741,\r\n    \"description\": \"some description\",\r\n    \"author_id\": 10\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/books/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"5"
+							]
+						},
+						"description": "Update single book in the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/books/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1"
+							]
+						},
+						"description": "Delete book from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Author Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/authors/6/books",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"6",
+								"books"
+							]
+						},
+						"description": "Get all author books from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"New book\",\r\n    \"number_of_pages\": 478,\r\n    \"isbn\": 4444444444444,\r\n    \"description\": \"description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/authors/1/books",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1",
+								"books"
+							]
+						},
+						"description": "Add a book to the database"
+					},
+					"response": []
+				}
+			],
+			"description": "Book resource management"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"username\": \"test2\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Add user to the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"123456\"\r\n\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM3MTc3NDB9.BAus_tz9SjRuenGO6vAz3pfzhBKUgBQefUhT2msURvU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me"
+							]
+						},
+						"description": "Get current user details"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_password\": \"123456\",\r\n    \"new_password\": \"234567\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/update/password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"update",
+								"password"
+							]
+						},
+						"description": "Update user password"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test123@gmail.com\",\r\n    \"username\": \"test123\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/update/data",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"update",
+								"data"
+							]
+						},
+						"description": "Update username and email"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
